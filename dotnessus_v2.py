@@ -324,8 +324,10 @@ class ReportItem(object):
 				continue
 
 			# If it's not a multi-valued att, store it as a string
-			setattr(self, n.tag, n.text.strip())
-
+			try:
+				setattr(self, n.tag, n.text.strip())
+			except:
+				pass
 		xml_report_item.clear()
 
 	def __repr__(self):
