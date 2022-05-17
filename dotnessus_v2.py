@@ -22,11 +22,12 @@
 # 2011-03-16:	0.1.3: Added more regex parsers
 # 2011-11-15:   0.2.0: Added better handling of parsing ReportItem attributes and
 #               get_scanned_ip Target method.
+# -*- coding: utf-8 -*-
 import sys
 import re
 import xml.etree.ElementTree as ET
 from datetime import datetime
-from StringIO import StringIO
+from io import StringIO
 
 # List all nodes in a ReportItem object that can have multiple values
 MULTI_VALUED_ATTS = [
@@ -191,7 +192,7 @@ class ReportHost(object):
 					# Check to see if named fields were given
 					if res.groupdict():
 						# Store each named field as an attribute
-						for k, v in res.groupdict().iteritems():
+						for k, v in res.groupdict().items():
 							setattr(self, k, v)
 
 					# No named fields, just grab whatever matched
@@ -336,5 +337,4 @@ class ReportItem(object):
 			return getattr(self, attr)
 		except AttributeError:
 			return None
-
 
